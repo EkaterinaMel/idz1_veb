@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel = "stylesheet" type = "text/css" href = "block.css">
+    <meta charset="UTF-8">
+    <script>
+function clearText(text){
+    let text1 = '';
+    let pos1 = 0;
+    let pos2 = 0;
+    while (text.indexOf('/*', pos1) >= 0) {
+        if (text.indexOf('*/', text.indexOf('/*', pos1) + 2) == -1) break;
+        pos2 = pos1;
+        pos1 = text.indexOf('/*', pos1);
+        text1 += text.substring(pos2, pos1);
+        pos1 = text.indexOf('*/', pos1+2) + 2;
+    }
+    text1 += text.substring(pos1, text.length);
+    return text1;
+}
+
+let text = "jdfhd /*dfhdhfd */0dfdfgfg";
+let html = `<p>До: ${text} После: ${clearText(text)}</p>`;
+html += `<p>До: /*kkdfkllkdkldfkldf*/ После: ${clearText('/*kkdfkllkdkldfkldf*/')}</p>`;
+html += `<p>До: text1 /* ginger */ После: ${clearText('text1 /* ginger */')}</p>`;
+html += `<p>До: /* ginger */text2  После: ${clearText('/* ginger */text2 ')}</p>`;
+html += `<p>До: /*/*/* ginger */ ummm После: ${clearText('text /*/*/* ginger */ ummm')}</p>`;
+html += `<p>До: /* ginger */*/*/ alee После: ${clearText('text /* ginger */*/*/ alee')}</p>`;
+html += `<p>До: /*/* ginger */*/ text123 После: ${clearText('text /*/* ginger */*/ text123')}</p>`;
+html += `<p>До: /*/* ginger */ text123/* ginger */text456 /* ginger */ text678 t/*ginger*/ext910/**/ /* После: ${clearText('text /*/* ginger */ text123/* ginger */text456 /* ginger */ text678 t/*ginger*/ext910/**/ /*')}</p>`;
+document.write(html);
+</script>
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>

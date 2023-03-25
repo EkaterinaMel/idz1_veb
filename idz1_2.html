@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel = "stylesheet" type = "text/css" href = "block.css">
+    <meta charset="UTF-8">
+    <script>
+let n = prompt('n=');
+if (isNaN(parseFloat(n)) || !isFinite(n) || n.indexOf(".") != -1 || Number(n) <= 2 || Number(n) >= 15) alert("Ошибочное число");
+else {
+    let text = ``;
+    for (let j = 1; j <= n; ++j)
+        text += `<hr width="${100/j}%">`;
+    text += `<table>`;
+    let n2 = n - Math.ceil(n/2) + 1;
+    let i = 1;
+    for (; i <= Math.round(n/2); ++i) {
+        text += `<tr>`;
+        for (let j = 1; j <= n; ++j) {
+            if (j < i || j > n2 + i - 1) text += `<td class="white"></td>`
+            else text += `<td class="black"></td>`;
+        }
+        text += `</tr>`;
+    }
+    for (; i <= n; ++i) {
+    text += `<tr>`;
+    for (let j = 1; j <= n; ++j) {
+        if (j <= n - i || j > n - (i - n2)) text += `<td class="white"></td>`
+        else text += `<td class="black"></td>`;
+    }
+    text += `</tr>`;
+    }
+    text += `</table>`;
+    for (let j = n; j >= 1; --j)
+        text += `<hr width="${100/j}%">`;
+    document.write(text);
+}
+</script>
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
